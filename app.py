@@ -76,8 +76,7 @@ if (dni):
   firstDay.strftime('%d-%m-%y')
   lastDay = st.date_input('Hasta :',week_ago)
   lastDay.strftime('%d-%m-%y')
-  st.write('Período: '+firstDay+' a '+lastDay)
-
+  #st.write('Período: '+firstDay+' a '+lastDay)
 
   if dia1=='Lunes' or diat=='Lunes a viernes':
 
