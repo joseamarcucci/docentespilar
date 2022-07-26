@@ -1,14 +1,6 @@
-scikit-learn==0.24.2
-pandas==1.2.4
-
-matplotlib==3.4.2
-seaborn==0.11.1
-numpy== 1.23.1
-opencv-python-headless
+pandas==1.2.3
 streamlit==1.10.0
 gspread==3.6.0
-gspread_dataframe
-df2gspread
 datetime
 html5lib
 urllib3==1.24.3
@@ -18,17 +10,19 @@ oauth2client
 altair
 plotly==5.2.1
 Pillow
-gspread-formatting
+numpy
 google-api-python-client
-qrcode
+mysql.connector
 python-decouple
 PySocks
 Pillow
 pyftpdlib
 pybase64
-streamlit-aggrid
+argparse
 streamlit_folium
+
 extra_streamlit_components
-jwt
-bcrypt
+pycountry
+xlsxwriter
+df2gspread
 
