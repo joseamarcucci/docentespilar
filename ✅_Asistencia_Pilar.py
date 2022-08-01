@@ -86,10 +86,12 @@ def add_userdata(username,password):
 
 def login_user(password):
 	sql="SELECT * FROM datos WHERE nro_doc = %s"
+
 	#c.execute('SELECT * FROM userstable WHERE password = ',(username,password))
 	val = (password,)
 
 	c.execute(sql, val)
+
 	data = c.fetchall()
 	df = pd.DataFrame(data, columns=['Nombre', 'DNI', 'Numero','Correo','Celular','Facultad'])
 	#df = pd.DataFrame(data)
@@ -100,7 +102,10 @@ def login_user(password):
 	#st.table(df)
 	return data
 
-
+sql2 = "SELECT * FROM codigosua"
+c.execute(sql2)
+data = c.fetchall()
+df2 = pd.DataFrame(data, columns=['codigo', 'ua'])
 
 
 def view_all_users():
@@ -152,7 +157,11 @@ def main():
 				celular = ', '.join(celular)
 				correo= st.session_state.df.iloc[:, 3]
 				correo = ', '.join(correo)
-				facu = st.session_state.df.iloc[:, 5]
+
+				f0p = pd.merge(df2, st.session_state.df, left_on='codigo', right_on='Facultad')
+				facu= f0p.iloc[:, 1]
+				facu = ', '.join(facu)
+
 				#selected_reward_price = st.session_state.df.loc[st.session_state.df.DNI == password]["Facultad"].iloc[4]
 
 				datos.empty()
@@ -172,7 +181,7 @@ def main():
 														  text-align:center;
 														  margin-top:-10px;
 														  '>
-														  {txt}<br>{txt2}<br>{txt22}<br>{txt3}<br><b>El día {dia}<br>se registró su asistencia.</b></style>
+														  {txt}<br>{txt2}<br>{txt22}<br>{facu}<br><br><b>El día {dia}<br>se registró su asistencia.</b></style>
 														  <br></p>"""
 				col222.markdown(htmlstr1, unsafe_allow_html=True)
 
