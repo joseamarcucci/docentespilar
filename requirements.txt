@@ -20,7 +20,7 @@ pyftpdlib
 pybase64
 argparse
 streamlit_folium
-
+geocoder
 extra_streamlit_components
 pycountry
 xlsxwriter
