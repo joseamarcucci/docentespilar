@@ -44,8 +44,16 @@ passwordh = env_config.get('password')
 base = env_config.get('base')
 api = env_config.get('api')
 secret = env_config.get('secret')
+from streamlit_folium import folium_static
+import folium
 
-# Security
+make_map_responsive = """
+  <style>
+  [title~="st.iframe"] { width: 100%}
+  border: 1px solid rgba(9, 171, 59, 0.2);
+  </style>
+"""
+st.markdown(make_map_responsive, unsafe_allow_html=True)
 #passlib,hashlib,bcrypt,scrypt
 import hashlib
 def make_hashes(password):
@@ -72,9 +80,9 @@ def create_usertable():
 	c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT,password TEXT)')
 
 
-def add_userdata(username,password):
-	sql = "INSERT INTO userstable (Dia,DNI) VALUES (%s, %s)"
-	val = (username, password)
+def add_userdata(username,password, ip, coor):
+	sql = "INSERT INTO accesos (Dia,DNI, Ip, Lugar) VALUES (%s, %s,%s, %s)"
+	val = (username, password,ip, coor)
 
 	c.execute(sql, val)
 	mydb.commit()
@@ -101,13 +109,47 @@ def login_user(password):
 	#st.write(nombre)
 	#st.table(df)
 	return data
+import requests
+g = geocoder.ipinfo('me')
+ip = geocoder.ip('me')
+location = ip.latlng
+
+
+map = folium.Map(location=location, zoom_start=10)
+folium.CircleMarker(location=location, radius=50, color="red").add_to(map)
+folium.Marker(location).add_to(map)
+
+coor=(pd.DataFrame(location))
+#st.table(coor)
+from geopy.geocoders import Nominatim
+
+# initialize Nominatim API
+geolocator = Nominatim(user_agent="geoapiExercises")
+
+
+# Latitude & Longitude input
+Latitude = str(coor.iloc[0, 0])
+
+Longitude = str(coor.iloc[1, 0])
+
+location = geolocator.reverse(Latitude + "," + Longitude)
+
+#st.write(location.address)
+
+
 
 sql2 = "SELECT * FROM codigosua"
 c.execute(sql2)
 data = c.fetchall()
 df2 = pd.DataFrame(data, columns=['codigo', 'ua'])
+c.execute('SELECT * FROM userstable')
+data1 = c.fetchall()
+df3 = pd.DataFrame(data1, columns=['Nombre', 'DNI'])
+c.execute('SELECT * FROM datos')
+data4 = c.fetchall()
+df0 = pd.DataFrame(data4, columns=['Nombre', 'DNI', 'Numero', 'Correo', 'Celular', 'Facultad'])
 
-
+#f0p = pd.merge(df2, st.session_state.df, left_on='codigo', right_on='Facultad')
 def view_all_users():
 	c.execute('SELECT * FROM userstable')
 	data = c.fetchall()
@@ -170,7 +212,7 @@ def main():
 				txt22 = "{}".format(correo)
 				txt3="{}".format(celular)
 				#txt4 = "{}".format(selected_reward_price)
-				add_userdata(dia,password)
+				add_userdata(dia,password,g.ip,location.address)
 
 				htmlstr1 = f"""<p style='background-color:rgba(9, 171, 59, 0.2);;font-family: Oswald; 
 														  color:rgb(23, 108, 54);
@@ -184,7 +226,8 @@ def main():
 														  {txt}<br>{txt2}<br>{txt22}<br>{facu}<br><br><b>El día {dia}<br>se registró su asistencia.</b></style>
 														  <br></p>"""
 				col222.markdown(htmlstr1, unsafe_allow_html=True)
-
+				with col222:
+				  folium_static(map)
 
 
 			else:
