@@ -25,4 +25,5 @@ extra_streamlit_components
 pycountry
 xlsxwriter
 df2gspread
+geopy
 
