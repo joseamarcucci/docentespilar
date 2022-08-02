@@ -11,7 +11,7 @@ altair
 plotly==5.2.1
 Pillow
 numpy
-socket
+socket.py==0.1.0
 google-api-python-client
 mysql.connector
 python-decouple
