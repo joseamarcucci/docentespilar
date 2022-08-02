@@ -113,7 +113,10 @@ import requests
 g = geocoder.ipinfo('me')
 ip = geocoder.ip('me')
 location = ip.latlng
-
+hostname = socket.gethostname()
+IPAddr = socket.gethostbyname(hostname)
+st.write("Your Computer Name is:" + hostname)
+st.write("Your Computer IP Address is:" + IPAddr)
 
 map = folium.Map(location=location, zoom_start=10)
 folium.CircleMarker(location=location, radius=50, color="red").add_to(map)
