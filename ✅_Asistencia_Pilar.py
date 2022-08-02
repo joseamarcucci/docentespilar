@@ -113,6 +113,7 @@ import requests
 g = geocoder.ipinfo('me')
 ip = geocoder.ip('me')
 location = ip.latlng
+import socket
 hostname = socket.gethostname()
 IPAddr = socket.gethostbyname(hostname)
 st.write("Your Computer Name is:" + hostname)
