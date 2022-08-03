@@ -135,7 +135,13 @@ Longitude = str(coor.iloc[1, 0])
 location = geolocator.reverse(Latitude + "," + Longitude)
 
 #st.write(location.address)
+import socket
 
+# get the hostname of the socket
+hostname = socket.gethostname()
+# get the IP address of the hostname
+ip_address = socket.gethostbyname(hostname)
+st.write('IP Address:{}'.format(ip_address))
 
 
 sql2 = "SELECT * FROM codigosua"
