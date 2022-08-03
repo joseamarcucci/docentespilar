@@ -235,18 +235,25 @@ def main():
 				col23.warning("Ingrese DNI")
 
 	components.html(
-	"""
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HP3NVL9W85"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+		"""
+	<html>
+  <head>
+    
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HP3NVL9W8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-      gtag('config', 'G-HP3NVL9W85');
-    </script>
-    """
-)
+  gtag('config', 'G-HP3NVL9W8');
+</script>
+  </head>
+  <body>
+    
+  </body>
+</html>"""
+	)
 
 
 
