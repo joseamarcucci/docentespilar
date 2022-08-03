@@ -46,7 +46,7 @@ api = env_config.get('api')
 secret = env_config.get('secret')
 from streamlit_folium import folium_static
 import folium
-
+import streamlit.components.v1 as components
 make_map_responsive = """
   <style>
   [title~="st.iframe"] { width: 100%}
