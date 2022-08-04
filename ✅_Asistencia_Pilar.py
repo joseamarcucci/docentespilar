@@ -240,6 +240,7 @@ def main():
 
 
 	components.html("""<script type="text/javascript">var sc_project=12780404; var sc_invisible=1; var sc_security="b99889ba"; </script><script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script><noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/12780404/0/b99889ba/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript><a href="https://statcounter.com/p12780404/?guest=1">View My Stats</a>""")
+	components.html("""<script async src="https://www.googletagmanager.com/gtag/js?id=G-HP3NVL9W85"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-HP3NVL9W85');</script>""")
 
 
 if __name__ == '__main__':
