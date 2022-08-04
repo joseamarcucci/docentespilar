@@ -243,38 +243,7 @@ def main():
 
 	components.html("""<script async src="https://www.googletagmanager.com/gtag/js?id=G-HP3NVL9W85"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-HP3NVL9W85');</script>""")
 
-	def inject_ga():
-		"""Add this in your streamlit app.py
-        see https://github.com/streamlit/streamlit/issues/969
-        """
-		# new tag method
-		GA_ID = "google_analytics"
-		# NOTE: you should add id="google_analytics" value in the GA script
-		# https://developers.google.com/analytics/devguides/collection/analyticsjs
-		GA_JS = """
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HP3NVL9W85"> id="google_analytics" </script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
 
-	  gtag('config', 'G-HP3NVL9W85');
-	</script>
-	"""
-		# Insert the script in the head tag of the static template inside your virtual
-		index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
-		logging.info(f'editing {index_path}')
-		soup = BeautifulSoup(index_path.read_text(), features="lxml")
-		if not soup.find(id=GA_ID):  # if cannot find tag
-			bck_index = index_path.with_suffix('.bck')
-			if bck_index.exists():
-				shutil.copy(bck_index, index_path)  # recover from backup
-			else:
-				shutil.copy(index_path, bck_index)  # keep a backup
-			html = str(soup)
-			new_html = html.replace('<head>', '<head>\n' + GA_JS)
-			index_path.write_text(new_html)
 if __name__ == '__main__':
 	main()
 	inject_ga()
