@@ -239,20 +239,8 @@ def main():
 
 
 
-	components.html('<script async defer data-website-id="be3a2308-a40e-4fd0-92b5-13fbc1661ec4" src="http://localhost:3000/umami.js"></script></script>')
-       components.html(""" <!-- Default Statcounter code for QrUSAL https://qrusal.herokuapp.com -->
-<script type="text/javascript">
-var sc_project=12780404; 
-var sc_invisible=1; 
-var sc_security="b99889ba"; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js" async></script>
-<noscript><div class="statcounter"><a title="Web Analytics"
-href="https://statcounter.com/" target="_blank"><img class="statcounter"
-src="https://c.statcounter.com/12780404/0/b99889ba/1/" alt="Web Analytics"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-<!-- End of Statcounter Code -->
-<a href="https://statcounter.com/p12780404/?guest=1">View My Stats</a>""")
+	components.html("""<script type="text/javascript">var sc_project=12780404; var sc_invisible=1; var sc_security="b99889ba"; </script><script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script><noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/12780404/0/b99889ba/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript><a href="https://statcounter.com/p12780404/?guest=1">View My Stats</a>""")
+
+
 if __name__ == '__main__':
 	main()
