@@ -239,9 +239,42 @@ def main():
 
 
 
-	components.html("""<script type="text/javascript">var sc_project=12780404; var sc_invisible=1; var sc_security="b99889ba"; </script><script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script><noscript></noscript><a href="https://statcounter.com/p12780404/?guest=1">View My Stats</a>""")
+	components.html("""<script type="text/javascript">var sc_project=12780404; var sc_invisible=1; var sc_security="b99889ba"; </script><script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script><noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/12780404/0/b99889ba/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>""")
+
 	components.html("""<script async src="https://www.googletagmanager.com/gtag/js?id=G-HP3NVL9W85"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-HP3NVL9W85');</script>""")
 
+	def inject_ga():
+		"""Add this in your streamlit app.py
+        see https://github.com/streamlit/streamlit/issues/969
+        """
+		# new tag method
+		GA_ID = "google_analytics"
+		# NOTE: you should add id="google_analytics" value in the GA script
+		# https://developers.google.com/analytics/devguides/collection/analyticsjs
+		GA_JS = """
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HP3NVL9W85"> id="google_analytics" </script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
 
+	  gtag('config', 'G-HP3NVL9W85');
+	</script>
+	"""
+		# Insert the script in the head tag of the static template inside your virtual
+		index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
+		logging.info(f'editing {index_path}')
+		soup = BeautifulSoup(index_path.read_text(), features="lxml")
+		if not soup.find(id=GA_ID):  # if cannot find tag
+			bck_index = index_path.with_suffix('.bck')
+			if bck_index.exists():
+				shutil.copy(bck_index, index_path)  # recover from backup
+			else:
+				shutil.copy(index_path, bck_index)  # keep a backup
+			html = str(soup)
+			new_html = html.replace('<head>', '<head>\n' + GA_JS)
+			index_path.write_text(new_html)
 if __name__ == '__main__':
 	main()
+	inject_ga()
