@@ -47,6 +47,7 @@ secret = env_config.get('secret')
 from streamlit_folium import folium_static
 import folium
 import streamlit.components.v1 as components
+components.html('<script async defer data-website-id="be3a2308-a40e-4fd0-92b5-13fbc1661ec4" src="<https://qrusal.herokuapp.com/umami.js>"></script>')
 make_map_responsive = """
   <style>
   [title~="st.iframe"] { width: 100%}
@@ -234,26 +235,7 @@ def main():
 		else:
 				col23.warning("Ingrese DNI")
 
-	components.html(
-		"""
-	<html>
-  <head>
-    
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HP3NVL9W8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-HP3NVL9W8');
-</script>
-  </head>
-  <body>
-    
-  </body>
-</html>"""
-	)
 
 
 
