@@ -239,7 +239,15 @@ def main():
 
 
 
-	components.html('<script async defer data-website-id="be3a2308-a40e-4fd0-92b5-13fbc1661ec4" src="https://qrusal.herokuapp.com/umami.js"></script>></script>')
+	components.html('<script async defer data-website-id="be3a2308-a40e-4fd0-92b5-13fbc1661ec4" src="http://localhost:3000/umami.js"></script></script>')
+	components.html('<script async src="https://www.googletagmanager.com/gtag/js?id=G-HP3NVL9W85"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-HP3NVL9W85');
+	</script>')
 
 
 if __name__ == '__main__':
