@@ -21,7 +21,7 @@ from urllib.request import urlopen
 col12, col22,col32 = st.columns([1,2,1])
 arriba=st.empty()
 from datetime import timezone, datetime, timedelta
-dia=datetime.now(argentina).strftime('%A %d-%m-%Y %H:%M:%S')
+dia=datetime.now(argentina).strftime('%A %d-%m-%Y %H:%M')
 dia=dia.replace('Monday','Lunes')
 dia=dia.replace('Tuesday','Martes')
 dia=dia.replace('Wednesday','Miércoles')
