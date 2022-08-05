@@ -17,7 +17,7 @@ local_css("styledocentes.css")
 col1, col2,col3 = st.columns([1,2,1])
 #vivod=df.iat[1,1]
 #vivom=df.iat[0,1]
-
+from urllib.request import urlopen
 col12, col22,col32 = st.columns([1,2,1])
 arriba=st.empty()
 from datetime import timezone, datetime, timedelta
