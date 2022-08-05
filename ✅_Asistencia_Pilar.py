@@ -81,9 +81,9 @@ def create_usertable():
 	c.execute('CREATE TABLE IF NOT EXISTS userstable(username TEXT,password TEXT)')
 
 
-def add_userdata(username,password, ip, coor):
-	sql = "INSERT INTO accesos (Dia,DNI, Ip, Lugar) VALUES (%s, %s,%s, %s)"
-	val = (username, password,ip, coor)
+def add_userdata(username,password):
+	sql = "INSERT INTO accesos (Dia,DNI) VALUES (%s, %s)"
+	val = (username, password)
 
 	c.execute(sql, val)
 	mydb.commit()
@@ -110,32 +110,10 @@ def login_user(password):
 	#st.write(nombre)
 	#st.table(df)
 	return data
-import requests
-g = geocoder.ipinfo('me')
-ip = geocoder.ip('me')
-location = ip.latlng
 
 
-map = folium.Map(location=location, zoom_start=10)
-folium.CircleMarker(location=location, radius=50, color="red").add_to(map)
-folium.Marker(location).add_to(map)
-
-coor=(pd.DataFrame(location))
-#st.table(coor)
-from geopy.geocoders import Nominatim
-
-# initialize Nominatim API
-geolocator = Nominatim(user_agent="geoapiExercises")
 
 
-# Latitude & Longitude input
-Latitude = str(coor.iloc[0, 0])
-
-Longitude = str(coor.iloc[1, 0])
-
-location = geolocator.reverse(Latitude + "," + Longitude)
-
-#st.write(location.address)
 
 
 
@@ -213,7 +191,7 @@ def main():
 				txt22 = "{}".format(correo)
 				txt3="{}".format(celular)
 				#txt4 = "{}".format(selected_reward_price)
-				add_userdata(dia,password,g.ip,location.address)
+				add_userdata(dia,password)
 
 				htmlstr1 = f"""<p style='background-color:rgba(9, 171, 59, 0.2);;font-family: Oswald; 
 														  color:rgb(23, 108, 54);
@@ -240,21 +218,7 @@ def main():
 
 
 	components.html("""<script type="text/javascript">var sc_project=12780404; var sc_invisible=1; var sc_security="b99889ba"; </script><script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script><noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/12780404/0/b99889ba/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>""")
-	import json
 
-	# store the URL in url as
-	# parameter for urlopen
-	url = "https://api.statcounter.com/stats/?vn=3&s=summary&f=json&pi=12780404&g=daily&t=1659704099&u=josemarcucci&sha1=56e53368f668f45cc408a6e89231f9738be1537a"
-
-	# store the response of URL
-	response = urlopen(url)
-
-	# storing the JSON response
-	# from url in data
-	data_json = json.loads(response.read())
-
-	# print the json response
-	st.write(data_json)
 
 
 if __name__ == '__main__':
