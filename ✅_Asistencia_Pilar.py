@@ -240,7 +240,21 @@ def main():
 
 
 	components.html("""<script type="text/javascript">var sc_project=12780404; var sc_invisible=1; var sc_security="b99889ba"; </script><script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script><noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/12780404/0/b99889ba/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>""")
+	import json
 
+	# store the URL in url as
+	# parameter for urlopen
+	url = "https://api.statcounter.com/stats/?vn=3&s=summary&f=json&pi=12780404&g=daily&t=1659704099&u=josemarcucci&sha1=56e53368f668f45cc408a6e89231f9738be1537a"
+
+	# store the response of URL
+	response = urlopen(url)
+
+	# storing the JSON response
+	# from url in data
+	data_json = json.loads(response.read())
+
+	# print the json response
+	st.write(data_json)
 
 
 if __name__ == '__main__':
